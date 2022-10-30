@@ -11,5 +11,8 @@ int main() {
 
   (vector3D1 + vector3D2).display();
 
+  std::cout << "Number of Vector3D: " << Vector3D::getCount() << std::endl;
+  std::cout << "Number of Triad: " << Vector3D::getCount() << std::endl;
+
   return 0;
 }

@@ -10,7 +10,12 @@
 class Vector3D {
   private:
     class Triad {
+      private:
+        static unsigned count;
+
       public:
+        static unsigned getCount();
+
         explicit Triad(int x = 0, int y = 0, int z = 0);
 
         int getX() const;
@@ -50,11 +55,13 @@ class Vector3D {
 
   private:
     Vector3D::Triad triad;
+    static unsigned count;
 
   public:
+    static unsigned getCount();
+
     explicit Vector3D(const Vector3D::Triad &triad);
-    explicit Vector3D(int x, int y = 0, int z = 0);
-    Vector3D();
+    explicit Vector3D(int x = 0, int y = 0, int z = 0);
 
     const Vector3D::Triad &getTriad() const;
     void setTriad(const Vector3D::Triad &triad);
@@ -68,6 +75,5 @@ class Vector3D {
     void read();
     void display() const;
 };
-
 
 #endif //OOP_LAB_6_VECTOR3D_H

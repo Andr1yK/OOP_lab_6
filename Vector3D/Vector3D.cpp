@@ -5,26 +5,29 @@
 #include <iostream>
 #include "Vector3D.h"
 
+unsigned Vector3D::count = 0;
+unsigned Vector3D::Triad::count = 0;
+
 Vector3D::Vector3D(const Triad &triad) {
   this->triad.setX(triad.getX());
   this->triad.setY(triad.getY());
   this->triad.setZ(triad.getZ());
+
+  Vector3D::count += 1;
 }
 
 const Vector3D::Triad &Vector3D::getTriad() const {
   return triad;
 }
 
-void Vector3D::setTriad(const Triad &triad) {
-  Vector3D::triad = triad;
-}
-
-Vector3D::Vector3D() {
-  setTriad(Triad{0, 0, 0});
+void Vector3D::setTriad(const Triad &copy) {
+  Vector3D::triad = copy;
 }
 
 Vector3D::Vector3D(int x, int y, int z) {
   setTriad(Triad{x, y, z});
+
+  Vector3D::count += 1;
 }
 
 void Vector3D::operator+=(const Vector3D &other) {
@@ -69,12 +72,16 @@ void Vector3D::display() const {
   triad.display();
 }
 
+unsigned Vector3D::getCount() {
+  return count;
+}
+
 int Vector3D::Triad::getX() const {
   return x;
 }
 
-void Vector3D::Triad::setX(int x) {
-  Triad::x = x;
+void Vector3D::Triad::setX(int value) {
+  Triad::x = value;
 }
 
 int Vector3D::Triad::getY() const {
@@ -96,7 +103,9 @@ void Vector3D::Triad::setZ(int value) {
 Vector3D::Triad::Triad(int x, int y, int z)
     : x(x),
       y(y),
-      z(z) {}
+      z(z) {
+//  Vector3D::Triad::count++;
+}
 
 bool Vector3D::Triad::operator==(const Vector3D::Triad &rhs) const {
   return x == rhs.x &&
@@ -185,4 +194,8 @@ void Vector3D::Triad::read() {
 
 void Vector3D::Triad::display() const {
   std::cout << toString() << std::endl;
+}
+
+unsigned Vector3D::Triad::getCount() {
+  return count;
 }
